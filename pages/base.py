@@ -1,5 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from unittestzero import Assert
 
 __author__ = 'Artur'
 
@@ -14,7 +15,7 @@ class BasePage(object):
     header_link_list = [
         {
             'locator': (By.CSS_SELECTOR, '#header a.phones'),
-            'url_suffix': 'phones',
+            'url_suffix': '/phones',
             'link_text': 'Telefony',
         },
         {
@@ -34,6 +35,59 @@ class BasePage(object):
         },
     ]
 
+    footer_link_list = [
+        {
+            'locator': (By.LINK_TEXT, 'Dla deweloperów'),
+            'url_suffix': 'developer.windowsphone.com/',
+            'link_text': 'Dla deweloperów',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Dla firm'),
+            'url_suffix': 'fwlink/?linkId=260887&clcid=0x415',
+            'link_text': 'Dla firm',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Praca'),
+            'url_suffix': 'windowsphonecareers.com/',
+            'link_text': 'Praca',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Mapa witryny'),
+            'url_suffix': 'sitemap',
+            'link_text': 'Mapa witryny',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Kontakt z nami'),
+            'url_suffix': 'contact-us',
+            'link_text': 'Kontakt z nami',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Opinie'),
+            'url_suffix': '#',
+            'link_text': 'Opinie',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Prywatność i pliki cookie'),
+            'url_suffix': 'fwlink/?linkId=248681&clcid=0x415',
+            'link_text': 'Prywatność i pliki cookie',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Warunki korzystania'),
+            'url_suffix': 'fwlink/?linkId=123158&clcid=0x415',
+            'link_text': 'Warunki korzystania',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Znaki towarowe'),
+            'url_suffix': '?linkId=4412893&clcid=0x415',
+            'link_text': 'Znaki towarowe',
+        },
+        {
+            'locator': (By.LINK_TEXT, 'Polska (polski)'),
+            'url_suffix': 'markets',
+            'link_text': 'Polska (polski)',
+        },
+    ]
+
     #Navigate to selected adress
     def go_to_page(self):
         self.driver.get(self.url)
@@ -46,12 +100,19 @@ class BasePage(object):
         title = self.driver.find_element(*locator)
         return title.text
 
-    def check_header_links(self):
-        for link in self.header_link_list:
+    #Check if links url and title are corect
+    def check_links(self, link_list):
+        bad_urls = []
+        bad_titles = []
+        for link in link_list:
             url = self.link_url(link.get('locator'))
             title = self.link_title(link.get('locator'))
-            assert (link.get('link_text')) in title
-            assert (link.get('url_suffix')) in url
+            if not url.endswith(link.get('url_suffix')):
+                bad_urls.append('%s don\'t end with %s' % (url, link.get('url_suffix')))
+            if not title == link.get('link_text'):
+                bad_titles.append('%s don\'t equal %s' % (title, link.get('link_text')))
+        Assert.equal(0, len(bad_urls), '%s bad url\'s found: ' % len(bad_urls) + ', '.join(bad_urls))
+        Assert.equal(0, len(bad_titles), '%s bad title\'s found: ' % len(bad_titles) + ', '.join(bad_titles))
 
     #Searching with search box
     def search_in_page(self, text):
