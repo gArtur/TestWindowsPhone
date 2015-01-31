@@ -13,6 +13,16 @@ class TestHomePage(unittest.TestCase):
         homepage.go_to_page()
         homepage.is_page_title_matches()
 
+    def test_check_home_page_links(self):
+        homepage = HomePage(self.driver)
+        homepage.go_to_page()
+        homepage.check_links(HomePage.home_page_link_list)
+
+    def test_check_header_links(self):
+        homepage = HomePage(self.driver)
+        homepage.go_to_page()
+        homepage.check_links(HomePage.header_link_list)
+
     def test_check_header_links(self):
         homepage = HomePage(self.driver)
         homepage.go_to_page()

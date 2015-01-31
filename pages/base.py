@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from unittestzero import Assert
@@ -88,6 +89,8 @@ class BasePage(object):
         },
     ]
 
+    _explore_dropdown_menu = (By.ID, 'exploreTitle')
+
     #Navigate to selected adress
     def go_to_page(self):
         self.driver.get(self.url)
@@ -99,6 +102,9 @@ class BasePage(object):
     def link_title(self, locator):
         title = self.driver.find_element(*locator)
         return title.text
+
+    def mouse_click_element(self, element):
+        self.driver.find_element(*element).click()
 
     #Check if links url and title are corect
     def check_links(self, link_list):

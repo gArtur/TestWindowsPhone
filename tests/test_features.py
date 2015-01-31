@@ -23,5 +23,11 @@ class TestFeaturesPage(unittest.TestCase):
         featurespage.go_to_page()
         featurespage.check_links(FeaturesPage.footer_link_list)
 
+    def test_check_dropdown_menu_links(self):
+        featurespage = FeaturesPage(self.driver)
+        featurespage.go_to_page()
+        featurespage.mouse_click_element(FeaturesPage._explore_dropdown_menu)
+        featurespage.check_links(FeaturesPage.explore_dropdown_link_list)
+
     def tearDown(self):
         self.driver.close()
