@@ -1,2 +1,3 @@
 # TestWindowsPhone
-WIP - Selenium WebDriver + Python automation testing for page WindowsPhone.com
+WIP - Selenium WebDriver + Python automation testing framework of page WindowsPhone.com.
+In works for learning purposes.
