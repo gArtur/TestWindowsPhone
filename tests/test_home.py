@@ -3,6 +3,7 @@ __author__ = 'Artur'
 from selenium import webdriver
 import unittest
 from pages.home import HomePage
+from pages.base import BasePage
 
 class TestHomePage(unittest.TestCase):
     def  setUp(self):
@@ -21,17 +22,12 @@ class TestHomePage(unittest.TestCase):
     def test_check_header_links(self):
         homepage = HomePage(self.driver)
         homepage.go_to_page()
-        homepage.check_links(HomePage.header_link_list)
-
-    def test_check_header_links(self):
-        homepage = HomePage(self.driver)
-        homepage.go_to_page()
-        homepage.check_links(HomePage.header_link_list)
+        homepage.check_links(BasePage.header_link_list)
 
     def test_check_footer_links(self):
         homepage = HomePage(self.driver)
         homepage.go_to_page()
-        homepage.check_links(HomePage.footer_link_list)
+        homepage.check_links(BasePage.footer_link_list)
 
     def test_search(self):
         homepage = HomePage(self.driver)

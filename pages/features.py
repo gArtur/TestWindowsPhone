@@ -7,9 +7,6 @@ from pages.base import BasePage
 class FeaturesPage(BasePage):
     url = "http://www.windowsphone.com/pl-pl/features"
     page_title = "Funkcje systemu Windows Phone (Polska)"
-    header_link_list = BasePage.header_link_list
-    footer_link_list = BasePage.footer_link_list
-    _explore_dropdown_menu = BasePage._explore_dropdown_menu
     explore_dropdown_link_list = [
         {
             'locator': (By.CSS_SELECTOR, 'a#signin'),

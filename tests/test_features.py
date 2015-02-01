@@ -3,6 +3,7 @@ __author__ = 'Artur'
 from selenium import webdriver
 import unittest
 from pages.features import FeaturesPage
+from pages.base import BasePage
 
 class TestFeaturesPage(unittest.TestCase):
     def  setUp(self):
@@ -16,17 +17,17 @@ class TestFeaturesPage(unittest.TestCase):
     def test_check_header_links(self):
         featurespage = FeaturesPage(self.driver)
         featurespage.go_to_page()
-        featurespage.check_links(FeaturesPage.header_link_list)
+        featurespage.check_links(BasePage.header_link_list)
 
     def test_check_footer_links(self):
         featurespage = FeaturesPage(self.driver)
         featurespage.go_to_page()
-        featurespage.check_links(FeaturesPage.footer_link_list)
+        featurespage.check_links(BasePage.footer_link_list)
 
     def test_check_dropdown_menu_links(self):
         featurespage = FeaturesPage(self.driver)
         featurespage.go_to_page()
-        featurespage.mouse_click_element(FeaturesPage._explore_dropdown_menu)
+        featurespage.mouse_click_element(BasePage._explore_dropdown_menu)
         featurespage.check_links(FeaturesPage.explore_dropdown_link_list)
 
     def tearDown(self):
